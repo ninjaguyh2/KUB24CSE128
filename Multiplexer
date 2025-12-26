@@ -1,0 +1,20 @@
+entity Multiplexer is 
+Port (sel : in STD_LOGIC_VECTOR(2 down to 0); 
+d_0,d_1,d_2,d_3,d_4,d_5,d_6,d_7: in STD_LOGIC; 
+mux_out : out STD_LOGIC); 
+end Multiplexer; 
+architecture Behavioral of Multiplexer is begin 
+process(sel,d_0,d_1,d_2,d_3,d_4,d_5,d_6,d_7)
+begin 
+ case sel is 
+ when "000"=>mux_out<=d_0;
+ when "001"=>mux_out<=d_1;
+ when "010"=>mux_out<=d_2;
+ when "011"=>mux_out<=d_3;
+ when "100"=>mux_out<=d_4;
+ when "101"=>mux_out<=d_5;
+ when "110"=>mux_out<=d_6;
+ when "111"=>mux_out<=d_7;
+ when others=>null;
+end case;
+end process;
