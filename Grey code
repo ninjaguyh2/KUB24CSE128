@@ -1,0 +1,9 @@
+entity BinaryToGray is 
+Port(b : in std_logic_vector(3 downto 0); g : out std_logic_vector(3 downto 0)); 
+end BinaryToGray; 
+architecture Behavioral of BinaryToGray is begin 
+ g(3)<= b(3); 
+ g(2)<= b(3) XOR b(2); 
+ g(1)<=b(2) XOR b(1); 
+ g(0)<=b(1) XOR b(0); 
+end Behavioral;
