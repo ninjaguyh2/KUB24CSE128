@@ -1,0 +1,24 @@
+Y = 𝑨 + 𝑪̅
+entity three_variable_booleanExp is
+ Port ( a,b,c : in STD_LOGIC; 
+ y_out : out STD_LOGIC); 
+end three_variable_booleanExp; 
+architecture Behavioral of three_variable_booleanExp is begin 
+y_out<=(a or (not(c)));
+end Behavioral;
+
+
+
+
+
+
+4– Variable Boolean Expression
+𝒀 = 𝑩̅𝑫̅+ 𝑩 𝑫
+entity Four_VariableBool_Exp is
+Port ( a,b,c,d : in STD_LOGIC; 
+y_out : out STD_LOGIC); 
+end Four_VariableBool_Exp; 
+architecture Behavioral of Four_VariableBool_Exp is
+begin 
+y_out<=(((not(b)) and (not(d)))or(b and d));
+end Behavioral;
