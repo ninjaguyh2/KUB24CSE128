@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{ 
+ struct node *llink; 
+ int info; 
+ struct node *rlink; 
+}; 
+typedef struct node *NODE; 
+NODE first=NULL,cur=NULL;// Empty List
+NODE createnode(); // function to Create a new temp Node
+void insertfront(); // function to insert front 
+void deletefront();// function to delete front
+void display(); 
+int main() 
+{ 
+ int ch; 
+ while(1) 
+ { 
+ printf("\n1.Insert Front\n2.Delete Front\n3.Exit\n Enter 
+Your Choice:"); 
+ scanf("%d",&ch); 
+ switch (ch) 
+ { 
+ case 1:insertfront(); 
+ /* code */
+ break; 
+ case 2:deletefront();break; 
+ case 3:exit(0); 
+ } 
+ } 
+ return 0; 
+}NODE createnode() 
+{ 
+ NODE temp; // Create a temp node
+ temp=malloc(sizeof(struct node)); //Allocate memory
+ printf("Enter Info: "); 
+ scanf("%d",&temp->info);// Read Info
+ temp->llink=NULL; //Set left link NULL
+ temp->rlink=NULL;// Set Right Link NULL
+ return temp; 
+} 
+void insertfront() 
+{ 
+ NODE temp=createnode(); 
+ if(first==NULL) // If the list is empty 
+ { 
+ first=temp; // new temp node is the first node
+ } 
+ else{ 
+ temp->rlink=first; // else right link to first node
+ first->llink=temp; // connect first left link to temp
+ first=temp; // make temp as first node
+ } 
+ display(); 
+} 
+void deletefront() 
+{ 
+ first=first->rlink;// Make second node as first 
+ first->llink=NULL; // Set first node left link to NULL
+ /* OR */
+ // cur=first->rlink; // Copy second node into cur
+ // cur->llink=NULL; // make cur is first node 
+ // free(first); free the first node
+ // first=cur; //make cur is first node 
+ display(); 
+} 
+void display() 
+{ 
+ cur=first;if(first==NULL) 
+ { 
+ printf("List is Empty!"); 
+ return; 
+ } 
+ printf("LIST: "); 
+ while(cur!= NULL) 
+ { 
+ printf("%d->",cur->info); 
+ cur=cur->rlink; 
+ } 
+}
