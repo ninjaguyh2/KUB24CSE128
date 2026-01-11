@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h> 
+// Create a structure of Node
+struct node 
+{ 
+ int info; 
+ struct node *link; 
+}; 
+typedef struct node *NODE; // giving New name to struct node
+NODE first = NULL, cur = NULL;// first=NULL for empty list
+NODE createnode(); // To create new temp node
+void insertfront();// To insert front of the List
+void deletefront(); // Delete front of the List
+void display(); // To display the status of List
+int main() 
+{ 
+ int ch; 
+ while (1) 
+ { 
+ printf("\n1.Insert Front\n 2.Delete Front \n 3.Exit \n Enter your choice: "); 
+ scanf("%d", &ch); 
+ switch (ch) 
+ { 
+ case 1: 
+ insertfront(); 
+ break; 
+ case 2: 
+ deletefront(); 
+ break; 
+ case 3:exit(0); 
+ } 
+ } 
+ return 0; 
+}NODE createnode() 
+{ 
+ NODE temp; // create a temp node i.e new node
+ temp = malloc(sizeof(struct node));// Allocate memory for the temp
+ printf("Enter info:");// Ask the user to enter integer info 
+ scanf("%d", &temp->info);// read the info from console
+ temp->link = NULL;// Make temp node link part null 
+ return temp; // return the new temp node
+} 
+void insertfront() 
+{ 
+ NODE temp = createnode();// call createnode fun to create temp node
+ if (first == NULL) // check it for Empty List 
+ { 
+ first = temp; // if List is empty temp node is the first node 
+ } 
+ else
+ { 
+ // if list having nodes,store address of First node into temp to insert front 
+ temp->link = first; 
+ first = temp; // Make temp node as first node
+ } 
+ display();// Display the status of List
+} 
+void deletefront() 
+{ 
+ if(first==NULL) 
+ { 
+ printf("\n List is Empty\n"); 
+ return; 
+ } 
+ // Make second node as first node and remove the access of first node
+ first=first->link; 
+ /* OR */
+ //cur=first->link;// Store second node in cur
+ //free(first);// Deallocate memory for first node
+ //first=cur;// Make second node as first node.. 
+ display(); 
+}void display() 
+{ 
+ cur = first; // Use the reference of cur to display list
+ printf("\n List: "); 
+ while (cur != NULL) // If cur is not null display node info
+ { 
+ printf("%d->", cur->info); 
+ cur = cur->link; // Move to next node 
+ } 
+}
