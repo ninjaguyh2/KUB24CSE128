@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{ 
+ struct node *llink; 
+ int info; 
+ struct node *rlink; 
+}; 
+typedef struct node *NODE; 
+NODE first=NULL,cur=NULL,prev=NULL;// Empty List
+NODE createnode(); // function to Create a new temp Node
+void insertend(); // function to insert front 
+void deleteend();// function to delete front
+void display(); 
+int main() 
+{ 
+ int ch; 
+ while(1) 
+ { 
+ printf("\n1.Insert End\n2.Delete End\n3.Exit\n Enter Your 
+Choice:"); 
+ scanf("%d",&ch); 
+ switch (ch) 
+ { 
+ case 1:insertend(); 
+ /* code */
+ break; 
+ case 2:deleteend();break; 
+ case 3:exit(0); 
+ } 
+ } 
+ return 0; 
+}NODE createnode() 
+{ 
+ NODE temp; // Create a temp node
+ temp=malloc(sizeof(struct node)); //Allocate memory
+ printf("Enter Info: "); 
+ scanf("%d",&temp->info);// Read Info
+ temp->llink=NULL; //Set left link NULL
+ temp->rlink=NULL;// Set Right Link NULL
+ return temp; 
+} 
+void insertend() 
+{ 
+ NODE temp=createnode(); 
+ if(first==NULL) // If the list is empty 
+ { 
+ first=temp; // new temp node is the first node
+ } 
+ else{ 
+ cur=first; 
+ while(cur->rlink!=NULL) 
+ { 
+ cur=cur->rlink; 
+ } 
+ cur->rlink=temp; 
+ temp->llink=cur; 
+ } 
+ display(); 
+} 
+void deleteend() 
+{ 
+ cur=first; 
+ if(first==NULL)// Check for list is empty
+ { 
+ printf("List is empty"); 
+ return; 
+ } 
+ // if(first->rlink==NULL) // Check for only one node in a list 
+ // {while(cur->rlink!=NULL) // Go to last node
+ { 
+ prev=cur; // Store second last in prev
+ cur=cur->rlink; // Move to next node
+ } 
+ prev->rlink=NULL; // Remove the link to last node
+ free(cur);// remove the last node permanently
+ display(); // Display the status of lIst 
+} 
+void display() 
+{ 
+ cur=first; 
+ if(first==NULL) 
+ { 
+ printf("List is Empty!"); 
+ return; 
+ } 
+ printf("LIST: "); 
+ while(cur!= NULL) 
+ { 
+ printf("%d->",cur->info); 
+ cur=cur->rlink; 
+ } 
+}
