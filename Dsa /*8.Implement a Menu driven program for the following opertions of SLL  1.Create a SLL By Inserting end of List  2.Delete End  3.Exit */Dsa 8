@@ -1,0 +1,90 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node // Create a Structure of node
+{ 
+int info; 
+struct node *link; 
+}; 
+typedef struct node *NODE;// Give new name to struct node
+NODE first=NULL;// first=null empty list
+NODE cur=NULL,prev=NULL; // cur,prev nodes used move to the end of the 
+list
+NODE createnode();// Creating new node temp
+void insertend();// inserting new temp node at end of the list
+void deleteend();// deleting the node at the end of the list
+void display(); // displaying the status of the List
+int main() 
+{ 
+ int ch; 
+ while(1) 
+ { 
+ printf("\n1.Insert End \n2.Delete End\n3.Exit\n Enter Your Choie: "); 
+ scanf("%d",&ch); 
+ switch (ch) 
+ { 
+ case 1:insertend();break; 
+ case 2:deleteend(); break; 
+ case 3:exit(0); 
+ } 
+ } 
+ return 0; 
+} 
+NODE createnode() 
+{ 
+ NODE temp; // create a temp node i.e new nodetemp =malloc(sizeof(struct node));// Allocate memory for the temp
+ printf("Enter info:");// Ask the user to enter integer info 
+ scanf("%d", &temp->info);// read the info from console
+ temp->link = NULL;// Make temp node link part null 
+ return temp; // return the new temp node
+} 
+void insertend() 
+{ 
+ NODE temp=createnode(); // Call createnode to create temp node 
+ if(first==NULL) // Check for Empty list
+ { 
+ first=temp; // if list is empty temp is first node
+ } 
+ else
+ { 
+ cur=first; // take reference of cur node to move to last node
+ while(cur->link!=NULL) // Start from frist node and move to last node 
+ { 
+ cur=cur->link; // Move to the next Node
+ } 
+ cur->link=temp;// insert end of the list 
+ } 
+ display(); // dispaly the status of the node
+} 
+void deleteend() 
+{ 
+ cur=first; // take reference of the cur to move to last 
+ if(first==NULL) // Check for empty list
+ { 
+ printf("List is Empty!"); 
+ return; 
+ } 
+/* if list contains only one node required this code */ 
+ // if(first->link==NULL) 
+ // {
+ // free(first); // remove the first node
+ // first=NULL; // make list empty again
+ // return;
+ // } 
+ while(cur->link!=NULL) // Repeat and check for last node{ 
+ prev=cur; // store second last node in prev
+ cur=cur->link;// move to next node
+ } 
+ prev->link=NULL;// make prev node link as NULL refers last node 
+ free(cur);// Remove last node from the list
+ display(); // Display the status of the list
+} 
+void display() 
+{ 
+ NODE cur=first; // Use cur as reference to display list
+ printf("\n List:"); 
+ while (cur != NULL) // If cur is not null display node info
+ { 
+ printf("%d->", cur->info); 
+ cur = cur->link; // Move to next node 
+ } 
+}
