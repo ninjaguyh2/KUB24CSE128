@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class EuclidGCD {
+    // Function to find GCD using Euclid's Algorithm
+    public static int gcd(int m, int n) {
+        while (n != 0) {
+            int r = m % n;
+            m = n;
+            n = r;
+        }
+        return m;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int m = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int n = sc.nextInt();
+
+        int result = gcd(m, n);
+        System.out.println("GCD is: " + result);
+
+        sc.close();
+    }
+}
